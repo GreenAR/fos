@@ -1,0 +1,78 @@
+
+.login-nav {
+    background-color: #fff;
+    padding: 35px 150px;
+}
+.login-brand {
+    padding: 0;
+}
+.login-logo {
+display: block;
+height: 50px;
+margin: -25px 0;
+}
+.nav.navbar-right {
+    margin-top: -16px;
+}
+.nav.navbar-right > li > a {
+color: #008ca9;
+font-size: 14px;
+}
+.navbar-default .nav > li > a:hover, .navbar-default .nav > li > a:focus {
+    background-color: #fff;
+    color: #007790;
+}
+.login-footer {
+	background-color: #494949;
+}
+.login-footer .copyright, .login-footer a {
+	color: #e0e0e0;
+}
+.login-footer p {
+	margin: 15px;
+}
+.wrapper .middle-box {
+    margin-top: 125px;
+}
+.middle-box-reset {
+    max-width: 400px;
+    z-index: 100;
+    margin: 0 auto;
+    padding-top: 100px;
+}
+.middle-box-signup {
+    max-width: 700px;
+    z-index: 100;
+    margin: 0 auto;
+    padding-top: 100px;
+    margin-bottom: 50px;
+}
+.login-text {
+	color: #1e3b52;
+	margin-bottom: 20px;
+	font-weight: 300;
+}
+.signup-text {
+	color: #1e3b52;
+	margin-bottom: 40px;
+	font-weight: 300;
+}
+.form-padding .form-group {
+    margin-bottom: 30px;
+}
+.login-btn-block {
+    margin-top: 40px;
+}
+.login-m-b {
+    margin-bottom: 25px;
+}
+.login-btn-default {
+    background-color: #f4f4f4;
+    color: #444;
+    border-color: #ddd;
+}
+.invalid-login {
+    color: red;
+    font-weight: 600;
+    margin: 0;
+}

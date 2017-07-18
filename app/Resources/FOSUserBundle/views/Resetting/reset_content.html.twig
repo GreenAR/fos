@@ -1,0 +1,48 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="row border-bottom">
+    <nav class="navbar navbar-default navbar-fixed-top login-nav" role="navigation">
+        <div class="navbar-header">
+        </div>
+    </nav>
+</div>
+
+<div class="wrapper wrapper-content">
+    <div class="ibox-content middle-box text-center animated fadeInDown">
+        <h2 class="login-text">Reset password</h2>
+        <p>
+            Enter your new password.
+        </p>
+        <form class="m-t fos_user_resetting_reset" role="form" action="{{ path('fos_user_resetting_reset', {'token': token}) }}" method="POST">
+            {{ form_row(form._token) }}
+            {% if not form.vars.valid %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for errorItem in form.plainPassword.first.vars.errors %}
+                            <li>
+                                {{ errorItem.message |trans }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+
+            <div class="form-group">
+                {{ form_widget(form.plainPassword.first, { 'attr': {'class': 'form-control','placeholder': 'New password'}} ) }}
+            </div>
+            <div class="form-group">
+                {{ form_widget(form.plainPassword.second, { 'attr': {'class': 'form-control','placeholder': 'Repeat new password'} }) }}
+            </div>
+            <button type="submit" class="btn btn-primary block full-width m-b">{{ 'resetting.reset.submit'|trans }}</button>
+        </form>
+        <form action="{{ path('fos_user_security_login') }}" method="POST">
+            <button type="submit" class="btn btn-success block full-width m-b">Return</button>
+        </form>
+    </div>
+</div>
+
+<footer class="navbar-default navbar-fixed-bottom login-footer">
+    <div class="container-fluid text-center">
+        <p class="copyright">&copy; 2016 - {{ "now"|date("Y") }} <a href="">FOS</a> Inc. All rights reserved.</p>
+    </div>
+</footer>
+

@@ -1,0 +1,135 @@
+{% extends "::base2.html.twig" %}
+ {% block actionArea %}
+ {% endblock %}
+{% block titleContaint %}
+    <h2>Edit Account</h2>
+{% endblock %}
+
+{% block breadcrumb %}
+    <ol class="breadcrumb">
+        <li>
+            <a>Account</a>
+        </li>
+        <li class="active">
+            <strong>Edit account</strong>
+        </li>
+    </ol>
+{% endblock %}
+
+{% block UsersActive %}class="active"{% endblock %}
+{% block Containt %}
+    <div class="tabs-container">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#tab-1"><i class="fa fa-user"></i> Profile</a></li>
+            <li class=""><a data-toggle="tab" href="#tab-2"><i class="fa fa-key"></i> Change password</a></li>
+        </ul>
+
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane active">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('settings_Account') }}">
+                        {{ form_row(form._token) }}
+                        {% if not form.vars.valid %}
+                            <div class="alert alert-danger">
+
+                                {{ form_errors(form.username) }}
+                                {{ form_errors(form.email) }}
+                                {{ form_errors(form.current_password) }}
+
+                            </div>
+                        {% endif %}
+                        {% if app.session.flashBag.has('success') %}
+                            {% for flashMessage in app.session.flashbag.get('success') %}
+                                <div class="alert alert-success">
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Username <span class="req-asterisk">*</span></label>
+                            {{ form_widget(form.username, { 'attr': {'class': 'form-control','placeholder': 'Username'}} ) }}
+                        </div>
+                        <div class="form-group">
+                            <label>First name</label>
+                            <input class="form-control" placeholder="First name" name="firstname" value="{{ app.user.firstname }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Last name</label>
+                            <input class="form-control" placeholder="Last name" name="lastname" value="{{ app.user.lastname }}">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Email address <span class="req-asterisk">*</span></label>
+                            {{ form_widget(form.email, { 'attr': {'class': 'form-control','placeholder': 'Email address'}} ) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Current password <span class="req-asterisk">*</span></label>
+                            {{ form_widget(form.current_password, { 'attr': {'class': 'form-control','placeholder': 'Current password','data-toggle':'password','id':'password'}} ) }}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit"  class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Save changes</button>
+                        </div>
+                        <br>
+                        <br>
+                    </form>
+                </div>
+            </div>
+            <div id="tab-2" class="tab-pane">
+                <div class="panel-body">
+                    <form method="post" action="{{ path('settings_Account') }}">
+                        {{ form_row(form2._token) }}
+                        {% if not form2.vars.valid %}
+                            <div class="alert alert-danger">
+
+                                {{ form_errors(form2.current_password) }}
+                                {{ form_errors(form2.plainPassword.first) }}
+                                {{ form_errors(form2.plainPassword.second) }}
+
+                            </div>
+                        {% endif %}
+                        {% if app.session.flashBag.has('success') %}
+                            {% for flashMessage in app.session.flashbag.get('success') %}
+                                <div class="alert alert-success">
+                                    {{ flashMessage }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                        <div class="form-group">
+                            <label for="password">Current password <span class="req-asterisk">*</span></label>
+                            {{ form_widget(form2.current_password, { 'attr': {'class': 'form-control','placeholder': 'Current password','data-toggle':'password','id':'password3'}} ) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">New password <span class="req-asterisk">*</span></label>
+                            {{ form_widget(form2.plainPassword.first, { 'attr': {'class': 'form-control','placeholder': 'New password','data-toggle':'password','id':'password4'}} ) }}
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Repeat new password <span class="req-asterisk">*</span></label>
+                            {{ form_widget(form2.plainPassword.second, { 'attr': {'class': 'form-control','placeholder': 'Repeat new password','data-toggle':'password','id':'password5'}} ) }}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit"  class="btn btn-primary pull-right"><i class="fa fa-edit"></i> Change password</button>
+                        </div>
+                        <br>
+                        <br>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('src/js/bootstrap-show-password.min.js') }}"></script>
+    <script type="text/javascript">
+        $("#password").password('toggle');
+        $("#password2").password('toggle');
+    </script>
+    <script>
+        $(document).ready(function () {
+            {% if not form2.vars.valid %}
+            $('.nav-tabs a[href="#tab-2"]').tab('show');
+            {% endif %}
+        });
+    </script>
+{% endblock %}

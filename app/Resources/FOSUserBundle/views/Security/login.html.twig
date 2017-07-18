@@ -1,0 +1,21 @@
+{% extends "@FOSUser/layout.html.twig" %}
+{% block head%}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>senaPBX</title>
+
+    <link href="{{ asset('src/css/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('src/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('src/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('src/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('src/css/login.css') }}" rel="stylesheet">
+{% endblock %}
+{% block fos_user_content %}
+    {{ include('@FOSUser/Security/login_content.html.twig') }}
+{% endblock fos_user_content %}
+{% block javascript%}
+    <script src="{{ asset('src/js/jquery-2.1.1.js') }}"></script>
+    <script src="{{ asset('src/js/bootstrap.min.js') }}"></script>
+{% endblock %}

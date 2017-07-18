@@ -1,0 +1,29 @@
+settings_homepage:
+    path:     /
+    defaults: { _controller: SettingsBundle:Default:index }
+settings_dashboard:
+    path:     /dashboard
+    defaults: { _controller: SettingsBundle:Default:dashboard }
+settings_addUser:
+    path:     /user/add
+    defaults: { _controller: SettingsBundle:Default:addUser }
+settings_editUser:
+    path:     /user/edit/{user}
+    defaults: { _controller: SettingsBundle:Default:editUser }
+settings_deleteUser:
+    path:     /user/delete/{user}
+    defaults: { _controller: SettingsBundle:Default:deleteUser }
+    options:
+        expose: true
+settings_listUsers:
+    path:     /user/list
+    defaults: { _controller: SettingsBundle:Default:userList }
+settings_changeUserStatus:
+    path:     /user/change/status/{id}
+    defaults: { _controller: SettingsBundle:Default:changeUserStatus }
+settings_logs:
+    path:     /logs
+    defaults: { _controller: SettingsBundle:Default:logs }
+settings_Account:
+    path:     /account
+    defaults: { _controller: SettingsBundle:Default:account }

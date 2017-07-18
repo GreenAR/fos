@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FOS{% endblock %}</title>
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('apple-touch-icon.png') }}" />
+    <link href="{{ asset('src/css/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('src/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
+
+    <link href="{{ asset('src/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('src/css/style.css') }}" rel="stylesheet">
+    {% block stylesheets %}
+    {% endblock %}
+</head>
+
+
+
+
+
+<body class="">
+
+<div id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            {% block sidebar %}
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <div class="brand-name brand-logo">
+                                <img alt="logo" src="{{ asset('apple-touch-icon.png') }}" width="50px" height="50px">
+                            </div>
+                        </div>
+                        <div class="logo-element">
+                            FOS
+                        </div>
+                    </li>
+                    <li {% block DashboardsActive %}{% endblock %}>
+                        <a href="{{ path('settings_dashboard') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Dashboard</span></a>
+                    </li>
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li {% block UsersActive %}{% endblock %}>
+                        <a href="#"><i class="fa fa-user"></i> <span class="nav-label">Users</span><span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level collapse">
+                            <li {% block UsersListUserActive %}{% endblock %}><a href="{{ path('settings_listUsers') }}">Users list</a></li>
+                            <li {% block UsersAddUserActive %}{% endblock %}><a href="{{ path('settings_addUser') }}">Add user</a></li>
+                        </ul>
+                    </li>
+                    {% endif %}
+                    {% if is_granted('ROLE_SUPER_ADMIN') %}
+                    <li {% block logsActive %}{% endblock %}>
+                        <a href="{{ path('settings_logs') }}"><i class="fa fa-file-text"></i> <span class="nav-label">App Log</span></a>
+                    </li>
+                    {% endif %}
+                </ul>
+            {% endblock %}
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
+                <div class="navbar-header">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                </div>
+                <ul class="nav navbar-top-links navbar-right">
+                    <li class="dropdown">
+                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
+                            {{ app.user.username }} <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="{{ path('settings_Account') }}">
+                                    <div>
+                                        <i class="fa fa-cog fa-fw"></i> Account
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="#" data-toggle="modal" data-target="#logout-modal">
+                                    <div>
+                                        <i class="fa fa-sign-out fa-fw"></i> Log out
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </nav>
+        </div>
+        <div class="row wrapper border-bottom white-bg page-heading">
+            <div class="col-sm-4">
+                {% block titleContaint %}
+                    <h2>This is main title</h2>
+                {% endblock %}
+                {% block breadcrumb %}
+                    <ol class="breadcrumb">
+                        <li>
+                            <a href="#">This is</a>
+                        </li>
+                        <li class="active">
+                            <strong>Breadcrumb</strong>
+                        </li>
+                    </ol>
+                {% endblock %}
+
+            </div>
+            <div class="col-sm-8">
+                <div class="title-action">
+                    {% block actionArea %}
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+
+        <div class="wrapper wrapper-content">
+            {% block Containt %}
+            {% endblock %}
+
+        </div>
+
+        <div class="footer">
+            <div class="container-fluid text-center">
+                <p class="copyright">&copy; 2016 - {{ "now"|date("Y") }} <a>FOS</a> Inc. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% block javascripts %}
+    <!-- Mainly scripts -->
+    <script src="{{ asset('src/js/jquery-2.1.1.js') }}"></script>
+    <script src="{{ asset('src/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('src/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+    <script src="{{ asset('src/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{{ asset('src/js/inspinia.js') }}"></script>
+    <script src="{{ asset('src/js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ asset('bundles/fosjsrouting/js/router.js') }}"></script>
+    <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+{% endblock %}
+{% block modals %}
+    <div class="modal inmodal" id="logout-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated flipInX">
+                <div class="modal-header">
+                    <h3 class="modal-title"><i class="fa fa-sign-out"></i> Logout Confirmation</h3>
+                </div>
+                <div class="modal-body">
+                    <p class="text-center">Are you sure you want to logout from this awesome system?</p>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Nope!</button>
+                    <a href="{{ path('fos_user_security_logout') }}" class="btn btn-primary">Yeah, I'm sure</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+</body>
+
+</html>
